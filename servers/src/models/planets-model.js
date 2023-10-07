@@ -39,6 +39,4 @@ fs.createReadStream("kepler_data.csv")
     console.log(`We have ${planet.length} habitable planet`);
   });
 
-module.exports = {
-  planet,
-};
+module.exports = planet;
