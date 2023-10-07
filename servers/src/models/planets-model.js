@@ -12,31 +12,39 @@ function isHabitablePlanet(planet) {
   );
 }
 
-fs.createReadStream("kepler_data.csv").pipe(
-  parse({
-    comment: "#",
-    columns: true,
-  })
-);
+function getPlanetsData() {
+  return new Promise((resolve, reject) => {
+    fs.createReadStream("kepler_data.csv").pipe(
+      parse({
+        comment: "#",
+        columns: true,
+      })
+    );
 
-fs.createReadStream("kepler_data.csv")
-  .pipe(
-    parse({
-      comment: "#",
-      columns: true,
-    })
-  )
+    fs.createReadStream("kepler_data.csv")
+      .pipe(
+        parse({
+          comment: "#",
+          columns: true,
+        })
+      )
 
-  .on("data", (data) => {
-    if (isHabitablePlanet(data)) {
-      planet.push(data);
-    }
-  })
-  .on("error", (err) => {
-    console.log(err);
-  })
-  .on("end", () => {
-    console.log(`We have ${planet.length} habitable planet`);
+      .on("data", (data) => {
+        if (isHabitablePlanet(data)) {
+          planet.push(data);
+        }
+      })
+      .on("error", (err) => {
+        console.log(err);
+      })
+      .on("end", () => {
+        console.log(`We have ${planet.length} habitable planet`);
+        resolve();
+      });
   });
+}
 
-module.exports = planet;
+module.exports = {
+  planet,
+  getPlanetsData,
+};
