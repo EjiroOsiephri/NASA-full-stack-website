@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const planetRouter = require("./routes/planets/planet-router");
+const launchesRouter = require("./routes/launches/launches-router");
 const morgan = require("morgan");
 
 const app = express();
@@ -21,5 +22,6 @@ app.get("/", (req, res) => {
 });
 
 app.use(planetRouter);
+app.use(launchesRouter);
 
 module.exports = app;
