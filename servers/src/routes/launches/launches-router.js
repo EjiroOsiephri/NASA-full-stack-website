@@ -6,7 +6,7 @@ const {
 
 const launchesRouter = express.Router();
 
-launchesRouter.get("/", httpGetAllLaunches);
-launchesRouter.post("/", httpAddNewLaunches);
+launchesRouter.get("/launches", httpGetAllLaunches);
+launchesRouter.post("/launches", httpAddNewLaunches);
 
 module.exports = launchesRouter;
