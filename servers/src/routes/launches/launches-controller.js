@@ -22,6 +22,13 @@ function httpAddNewLaunches(req, res) {
   }
 
   launch.launchDate = new Date(launch.launchDate);
+
+  if (launch.launchDate.toString() === "Invalid Date") {
+    return res.status(400).json({
+      error: "Wahala for you ooo, incorrect date",
+    });
+  }
+
   addNewLaunches(launch);
   return res.status(201).json(launch);
 }
