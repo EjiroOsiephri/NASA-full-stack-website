@@ -10,10 +10,7 @@ const app = express();
 //middleware
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "https://ejiro-nasa-project.netlify.app/",
-    ],
+    origin: ["http://localhost:3000", "https://ejiro-nasa-project.netlify.app"],
   })
 );
 

@@ -1,4 +1,4 @@
-const API_URL = "https://trialnode.onrender.com";
+const API_URL = "https://ejironode.onrender.com";
 
 // Load planets and return as JSON.
 async function httpGetPlanets() {
