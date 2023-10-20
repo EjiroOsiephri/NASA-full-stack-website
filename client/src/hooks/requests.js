@@ -1,9 +1,8 @@
-const API_URL = "https://ejironode.onrender.com";
+const API_URL = "https://ejironode3.onrender.com";
 
 // Load planets and return as JSON.
 async function httpGetPlanets() {
   const response = await fetch(`${API_URL}/planets`);
-  console.log(response);
   return await response.json();
 }
 
@@ -11,6 +10,7 @@ async function httpGetPlanets() {
 async function httpGetLaunches() {
   const response = await fetch(`${API_URL}/launches`);
   const fetchedLaunches = await response.json();
+  console.log(fetchedLaunches);
   return fetchedLaunches.sort((a, b) => {
     return a.flightNumber - b.flightNumber;
   });
