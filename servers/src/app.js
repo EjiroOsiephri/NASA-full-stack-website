@@ -10,14 +10,17 @@ const app = express();
 //middleware
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://ejiro-app.onrender.com"],
+    origin: [
+      "http://localhost:3000",
+      "https://ejiro-nasa-project.netlify.app/",
+    ],
   })
 );
 
 app.use(express.json());
 app.use(morgan("combined"));
 
-app.use(express.static(path.join(__dirname, "..", "public")));
+// app.use(express.static(path.join(__dirname, "..", "public")));
 
 // app.get("/*", (req, res) => {
 //   res.sendFile(

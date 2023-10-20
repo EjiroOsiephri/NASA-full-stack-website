@@ -1,8 +1,9 @@
-const API_URL = "http://localhost:8000";
+const API_URL = "https://trialnode.onrender.com";
 
 // Load planets and return as JSON.
 async function httpGetPlanets() {
   const response = await fetch(`${API_URL}/planets`);
+  console.log(response);
   return await response.json();
 }
 
