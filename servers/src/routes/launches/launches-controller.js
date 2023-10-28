@@ -36,8 +36,8 @@ function httpAddNewLaunches(req, res) {
 }
 
 function httpAbortLaunch(req, res) {
-  const launchId = req.params.id;
-  console.log(launchId);
+  const launchId = +req.params.id;
+
   if (!existLaunchWithId(launchId)) {
     return res.status(404).json({
       error: "Not Found",
