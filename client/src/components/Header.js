@@ -13,9 +13,7 @@ const styles = (theme) => ({
   root: {
     display: "flex",
     flexDirection: "row",
-    lineHeight: "20px",
-    marginBottom: "30px",
-    marginTop: "15px",
+    lineHeight: "80px",
   },
   logo: {
     display: "inherit",
@@ -46,6 +44,13 @@ const styles = (theme) => ({
     padding: [0, theme.padding / 2],
   },
   "@media (max-width: 800px)": {
+    root: {
+      display: "flex",
+      flexDirection: "row",
+      lineHeight: "20px",
+      marginBottom: "30px",
+      marginTop: "15px",
+    },
     logo: {
       display: "none",
     },

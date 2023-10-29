@@ -13,7 +13,6 @@ const styles = () => ({
 const Upcoming = (props) => {
   const { entered, launches, classes, abortLaunch } = props;
 
-
   const tableBody = useMemo(() => {
     return launches
       ?.filter((launch) => launch.upcoming)
@@ -42,11 +41,25 @@ const Upcoming = (props) => {
 
   return (
     <Appear id="upcoming" animate show={entered}>
-      <Paragraph>
+      <Paragraph
+        style={{
+          fontSize: "17px",
+          marginLeft: "-1em",
+        }}
+      >
         Upcoming missions including both SpaceX launches and newly scheduled
         Zero to Mastery rockets.
       </Paragraph>
-      <Words animate>Warning! Clicking on the ✖ aborts the mission.</Words>
+      <Words
+        style={{
+          fontSize: "17px",
+          marginLeft: "-1em",
+          marginBottom: "1em",
+        }}
+        animate
+      >
+        Warning! Clicking on the ✖ aborts the mission.
+      </Words>
       <Table animate show={entered}>
         <table style={{ tableLayout: "fixed" }}>
           <thead>
