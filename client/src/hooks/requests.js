@@ -1,4 +1,4 @@
-const API_URL = "https://ejiro-node-deploy.onrender.com";
+const API_URL = "https://ejiro-app.onrender.com";
 
 // Load planets and return as JSON.
 async function httpGetPlanets() {
