@@ -46,9 +46,9 @@ const Launch = (props) => {
       <form
         onSubmit={props.submitLaunch}
         style={{
-          display: "inline-grid",
-          gridTemplateColumns: "auto auto",
-          gridGap: "10px 20px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
         }}
       >
         <label
@@ -60,6 +60,10 @@ const Launch = (props) => {
           Launch Date
         </label>
         <input
+          style={{
+            width: "100%",
+            height: "30px",
+          }}
           type="date"
           id="launch-day"
           name="launch-day"
@@ -75,7 +79,15 @@ const Launch = (props) => {
         >
           Mission Name
         </label>
-        <input type="text" id="mission-name" name="mission-name" />
+        <input
+          style={{
+            width: "100%",
+            height: "30px",
+          }}
+          type="text"
+          id="mission-name"
+          name="mission-name"
+        />
         <label
           style={{
             fontSize: "17px",
@@ -87,15 +99,29 @@ const Launch = (props) => {
         <input
           style={{
             width: "100%",
-            marginLeft: "-1em",
+            height: "30px",
           }}
           type="text"
           id="rocket-name"
           name="rocket-name"
           defaultValue="Explorer IS1"
         />
-        <label htmlFor="planets-selector">Destination Exoplanet</label>
-        <select id="planets-selector" name="planets-selector">
+        <label
+          style={{
+            fontSize: "17px",
+          }}
+          htmlFor="planets-selector"
+        >
+          Destination Exoplanet
+        </label>
+        <select
+          style={{
+            width: "100%",
+            height: "30px",
+          }}
+          id="planets-selector"
+          name="planets-selector"
+        >
           {selectorBody}
         </select>
         <Clickable>
@@ -109,6 +135,8 @@ const Launch = (props) => {
               width: "100%",
               fontSize: "17px",
               whiteSpace: "noWrap",
+              textAlign: "center",
+              marginTop: "0.8rem",
             }}
           >
             Launch Mission ✔

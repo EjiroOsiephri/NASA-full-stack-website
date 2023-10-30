@@ -31,7 +31,7 @@ const History = (props) => {
           the year 2006.
         </Paragraph>
         <Table animate>
-          <table style={{ tableLayout: "fixed" }}>
+          <table>
             <thead>
               <tr>
                 <th style={{ width: "2rem" }}></th>
