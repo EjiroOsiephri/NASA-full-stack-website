@@ -11,6 +11,8 @@ const Launch = (props) => {
     ));
   }, [props.planets]);
 
+  console.log(props.planets);
+
   const today = new Date().toISOString().split("T")[0];
 
   return (
