@@ -16,8 +16,10 @@ const launch = {
   success: true,
 };
 
-function existLaunchWithId(launchId) {
-  return launches.has(launchId);
+async function existLaunchWithId(launchId) {
+  return await launchesDatabase.findOne({
+    flightNumber: launchId,
+  });
 }
 
 saveLaunch(launch);
@@ -32,7 +34,7 @@ async function saveLaunch(launch) {
   if (!planet) {
     throw new Error("No matching planets found");
   }
-  await launchesDatabase.updateOne(
+  await launchesDatabase.findOneAndUpdate(
     { flightNumber: launch.flightNumber },
     launch,
     {
@@ -70,11 +72,14 @@ async function scheduleNewLaunch(launch) {
   await saveLaunch(newLaunch);
 }
 
-function abortLaunchWithId(launchId) {
-  const aborted = launches.get(launchId);
-  aborted.upcoming = false;
-  aborted.success = false;
-  return aborted;
+async function abortLaunchWithId(launchId) {
+  const aborted = await launchesDatabase.updateOne(
+    {
+      flightNumber: launchId,
+    },
+    { upcoming: false, success: false }
+  );
+  return aborted.ok === 1 && aborted.nModified === 1;
 }
 
 module.exports = {
