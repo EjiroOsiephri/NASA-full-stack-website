@@ -5,6 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "test": "jest --watch",
+    "tests": "jest --detectOpenHandles",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "cluster": "pm2 start src/server.js -i 2"
@@ -12,6 +13,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "jest": {
+    "testEnvironment": "node"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "csv-parse": "^5.5.1",
