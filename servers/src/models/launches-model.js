@@ -17,7 +17,11 @@ const launch = {
 
 const SPACE_X_URL = "https://api.spacexdata.com/v4/launches/query";
 
-async function getLaunchesData() {
+async function findLaunch(filter) {
+  return await launchesDatabase.findOne(filter);
+}
+
+async function populateLaunches() {
   console.log("Loading data....");
   const response = await axios.post(
     SPACE_X_URL,
@@ -25,6 +29,7 @@ async function getLaunchesData() {
     {
       query: {},
       options: {
+        pagination: false,
         populate: [
           {
             path: "rocket",
@@ -58,12 +63,27 @@ async function getLaunchesData() {
       success: launchDoc["success"],
       customers,
     };
-    console.log(`${launch.flightNumber}, ${launch.rocket}`);
+    console.log(`${launch.flightNumber} ${launch.mission}`);
+
+    await saveLaunch(launch);
+  }
+}
+
+async function getLaunchesData() {
+  const firstLaunch = await findLaunch({
+    flightNumber: 1,
+    rocket: "Falcon 1",
+    mission: "FalconSat",
+  });
+  if (firstLaunch) {
+    console.log("Lauch Data already loaded");
+  } else {
+    await populateLaunches();
   }
 }
 
 async function existLaunchWithId(launchId) {
-  return await launchesDatabase.findOne({
+  return await findLaunch({
     flightNumber: launchId,
   });
 }
@@ -71,13 +91,6 @@ async function existLaunchWithId(launchId) {
 saveLaunch(launch);
 
 async function saveLaunch(launch) {
-  const planet = await planets.findOne({
-    kepler_name: launch.target,
-  });
-
-  if (!planet) {
-    throw new Error("No matching planets found");
-  }
   await launchesDatabase.findOneAndUpdate(
     { flightNumber: launch.flightNumber },
     launch,
@@ -105,6 +118,14 @@ async function getAllLaunches() {
 
 async function scheduleNewLaunch(launch) {
   const newFlightNumber = (await getLatestFlightNumber()) + 1;
+
+  const planet = await planets.findOne({
+    kepler_name: launch.target,
+  });
+
+  if (!planet) {
+    throw new Error("No matching planets found");
+  }
 
   const newLaunch = Object.assign(launch, {
     flightNumber: newFlightNumber,
