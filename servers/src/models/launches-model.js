@@ -49,6 +49,11 @@ async function populateLaunches() {
   );
   const launchDocs = response.data.docs;
 
+  if (response.status !== 200) {
+    console.log("Problem downloading launches data");
+    throw new Error("Launch data download failed");
+  }
+
   for (const launchDoc of launchDocs) {
     const payloads = launchDoc["payloads"];
     const customers = payloads.flatMap((payload) => {
@@ -112,8 +117,11 @@ async function getLatestFlightNumber() {
   return latestFlightNumber.flightNumber;
 }
 
-async function getAllLaunches() {
-  return await launchesDatabase.find({}, { _id: 0, _v1: 0 });
+async function getAllLaunches(skip, limit) {
+  return await launchesDatabase
+    .find({}, { _id: 0, _v1: 0 })
+    .skip(skip)
+    .limit(limit);
 }
 
 async function scheduleNewLaunch(launch) {
