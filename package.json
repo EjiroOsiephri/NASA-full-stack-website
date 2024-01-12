@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "server": "npm run dev --prefix servers",
-    "build": "cross-env BUILD_PATH=../servers/public react-scripts build",
     "client": "npm start --prefix client",
     "watch": "npm run server & npm run client",
     "deploy": "npm run build --prefix client && npm run dev --prefix servers",
