@@ -22,4 +22,4 @@ jobs:
         run: npm install
 
       - name: Build with npm
-        run: npm run build --prefix client
+        run: npm start --prefix client
