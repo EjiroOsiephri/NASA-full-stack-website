@@ -16,6 +16,10 @@ app.use(
 app.use(express.json());
 app.use(morgan("combined"));
 
+app.use('/', (req,res)=>{
+  res.json({message: "Welcome to nasa"})
+})
+
 app.use("/v1", api);
 
 // app.use(express.static(path.join(__dirname, "..", "public")));
